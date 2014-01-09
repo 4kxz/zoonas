@@ -1,0 +1,29 @@
+.admin-menu {
+    position: relative;
+    z-index: 1;
+}
+.admin-menu ul {
+    display: table;
+    position: absolute;
+    top: 2em;
+    box-shadow: 0 0 8px rgba(0, 0, 0, .25);
+    border-top: .25em solid rgb(210, 33, 60);
+}
+.admin-menu:hover .username {
+    background: rgb(210, 33, 60);
+    color: #FFF;
+}
+.admin-menu li {
+    display: none;
+}
+.admin-menu:hover li {
+    display: table-cell;
+}
+.admin-menu li a {
+    display: block;
+    width: 5em;
+    background: rgb(250, 250, 250);
+}
+.debug {
+    border: 2px solid rgba(150, 200, 0, .8) !important;
+}

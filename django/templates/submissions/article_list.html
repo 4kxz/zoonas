@@ -1,0 +1,22 @@
+{% load misc_tags %}
+<menu class="content-menu">
+    <ul>
+        <li><a href="{% modify_path_query sort='recent' %}">Recientes</a></li>
+        <li><a href="{% modify_path_query sort='best' %}">Mejores</a></li>
+        {% if current_zone %}
+        <li><a href="{% modify_path_query sort='zone' %}">Destacados</a></li>
+        {% else %}
+        <li><a href="{% modify_path_query sort='global' %}">Destacados</a></li>
+        {% endif %}
+    </ul>
+</menu>
+<div class="submissions">
+    {% for submission in submission_list %}
+    {% include 'submissions/article.html' %}
+    {% empty %}
+    <div class="content-messages">
+        Nada por aquí. <a href="{% url 'zones:index' %}">Seguir al conejo blanco</a>.
+    </div>
+    {% endfor %}
+</div>
+{% include 'pagination/pagination.html' %}

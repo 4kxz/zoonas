@@ -1,0 +1,21 @@
+{% extends 'base_template.html' %}
+{% load crispy_forms_tags %}
+
+{% block content_header %}
+<header class="content-header">
+    <h1>Comentar "<em>{{ commented_description }}</em>"</h1>
+</header>
+{% endblock %}
+
+{% block content_main %}
+{% if reply_to %}
+<section class="content-main">
+    {% include 'comments/article.html' with comment=reply_to %}
+</section>
+{% endif %}
+<section class="content-comments">
+    <h1>Nueva respuesta</h1>
+    {% crispy form %}
+</section>
+{% endblock %}
+

@@ -1,0 +1,12 @@
+{% load misc_tags %}
+
+{% if is_paginated %}
+<div class="content-pagination">
+    {% if page_obj.has_previous %}
+    <a class="previous" href="{% modify_path_query page=page_obj.previous_page_number %}">Menos ←</a>
+    {% endif %}
+    {% if page_obj.has_next %}
+    <a class="next" href="{% modify_path_query page=page_obj.next_page_number %}">→ Más</a>
+    {% endif %}
+</diV>
+{% endif %}

@@ -1,0 +1,29 @@
+{% extends 'base_template.html' %}
+{% load users_tags %}
+
+{% block content_header %}
+<header class="content-header">
+    <h1>Mensajes</h1>
+</header>
+{% endblock %}
+
+{% block content_main %}
+<section class="content-main">
+    <table class="notes">
+        <tr>
+            <th>Fecha</th>
+            <th>Usuario</th>
+            <th width="75%">Mensaje</th>
+            <th></th>
+        {% for note in note_list %}
+        <tr class="note {% if not note.is_editable %}locked{% endif %}">
+            <td>{{ note.modified|date:"Y-m-d H:i" }}</td>
+            <td>{% username_link note.author %}</td>
+            <td>{{ note.get_snippet }}</td>
+            <td><a href="{{ note.get_absolute_url }}">#</a></td>
+        </tr>
+        {% endfor %}
+    </table>
+    {% include 'pagination/pagination.html' %}
+</section>
+{% endblock %}

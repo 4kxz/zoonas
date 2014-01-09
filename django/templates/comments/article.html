@@ -1,0 +1,37 @@
+{% load misc_tags %}
+{% load votes_tags %}
+{% load comments_tags %}
+<article {{ comment|article:'item' }}>
+    <header>
+        {% if comment.parent %}
+        <span class="permalink"><a href="{{ comment.get_absolute_url }}">#{{ comment.pk }}</a> <span class="parent-reference">a <a href="{{ comment.parent.get_absolute_url }}">#{{ comment.parent.pk }}</a></span></span>
+        {% else %}
+        <a class="permalink" href="{{ comment.get_absolute_url }}">#{{ comment.pk }}</a>
+        {% endif %}
+    </header>
+    {% include 'notes/embed.html' with note=comment.note %}
+    {% if user.is_authenticated %}
+    <menu class="item-menu">
+        <ul>
+            <li><a href="{{ comment.get_reply_url }}">Responder</a></li>
+            {% if user == comment.note.author %}
+            <li><a href="{{ comment.note.get_edit_url }}">Editar</a></li>
+            <li><a href="{{ comment.note.get_erase_url }}">Borrar</a></li>
+            {% else %}
+            {% if user.is_superuser %}
+            <li><a href="{{ comment.note.get_erase_url }}">Borrar</a></li>
+            {% endif %}
+            <li><a href="{{ comment.get_report_url }}">Reportar</a></li>
+            {% endif %}
+            {% if zone_moderator %}
+            {% if not comment.is_rejected %}
+            <li>{% evaluation_form comment 'reject' %}</li>
+            {% else %}
+            <li>{% evaluation_form comment 'allow' %}</li>
+            {% endif %}
+            {% endif %}
+        </ul>
+    </menu>
+    {% endif %}
+    {% show_vote_form comment user %}
+</article>

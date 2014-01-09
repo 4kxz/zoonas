@@ -1,0 +1,9 @@
+{% load misc_tags %}
+{% load users_tags %}
+<div class="note-text">
+    {{ note.text|format }}
+</div>
+<footer>
+    <span class="author">{% username_link note.author %}</span>
+    <span title="{{ note.modified }}">hace {{ note.modified|timesince }}</span>
+</footer>

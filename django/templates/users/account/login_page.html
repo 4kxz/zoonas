@@ -1,0 +1,19 @@
+{% extends 'base_template.html' %}
+{% load crispy_forms_tags %}
+
+{% block content_header %}
+<header class="content-header">
+    <h1>Identificación</h1>
+</header>
+{% endblock %}
+
+{% block content_main %}
+<section class="content-main">
+    {% if user.is_authenticated %}
+    <p>Ya te has identificado.</p>
+    {% else %}
+    <p>Si no tienes una cuenta, puedes <a href="{% url 'account:register' %}">registrarte aquí</a>.</p>
+    {% crispy form %}
+    {% endif %}
+</section>
+{% endblock %}

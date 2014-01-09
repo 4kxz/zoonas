@@ -1,0 +1,28 @@
+{% if user.is_authenticated %}
+<h1>Zone menu</h1>
+<section class="subscribed-zones-menu">
+    <h1>
+        <a href="{% url 'frontpage' %}">Suscripciones</a>
+    </h1>
+    <ol class="zone-list">
+        {% for zone in subscribed_zone_list %}
+        <li><a href="{{ zone.get_absolute_url }}">{{ zone.name }}</a></li>
+        {% empty %}
+        <li><a href="{% url 'zones:index' %}">No tienes suscripciones</a></li>
+        {% endfor %}
+    </ol>
+</section>
+{% endif %}
+<section class="global-zones-menu">
+    <h1>
+        <a href="{% url 'submissions:global' %}">Todas</a>
+    </h1>
+    <ol class="zone-list">
+        {% for zone in default_zone_list %}
+        <li><a href="{{ zone.get_absolute_url }}">{{ zone.name }}</a></li>
+        {% empty %}
+        <li><a href="{% url 'zones:index' %}">Nada por aquí...</a></li>
+        {% endfor %}
+    </ol>
+    <a class="last" href="{% url 'zones:index' %}">Índice de zonas</a>
+</section>

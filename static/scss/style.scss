@@ -1,0 +1,56 @@
+@import url(http://fonts.googleapis.com/css?family=Fjalla+One);
+@import url(http://fonts.googleapis.com/css?family=Open+Sans+Condensed:300,700);
+
+@import 'common';
+@import 'normalize';
+
+h1, h2, p, a, ul, ol, li, form, input, nav, menu {
+    margin: 0;
+    padding: 0;
+}
+h1, h2 {
+    line-height: 1em;
+    font-family: $title-font;
+}
+h1 {
+    font-size: 1.4em;
+}
+h2 {
+    font-size: 1.2em;
+}
+a {
+    text-decoration: none;
+    color: $common-color;
+    &:hover, &:active, &:focus {
+        color: $dark-color;
+        outline: 0;
+    }
+    a:focus {
+        outline: thin dotted;
+    }
+    &.external:hover {
+        text-decoration: underline;
+    }
+}
+li {
+    list-style: none;
+}
+
+body {
+    margin: 0;
+    min-width: 20em;
+    background: $bg-color fixed center url('/static/struck.png');
+    line-height: 1.25em;
+    font-size: $font-size;
+    font-family: $body-font;
+    color: $dark-color;
+}
+
+#header, .content, #footer {
+    max-width: $page-max-size;
+    margin: auto;
+}
+
+@import 'header';
+@import 'middle';
+@import 'footer';

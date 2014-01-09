@@ -1,0 +1,19 @@
+{% extends 'help/rules_page.html' %}
+
+{% block content_navigation %}
+<nav class="content-navigation">
+    <ul>
+        <li><a href="{% url 'rules' %}">Normas</a></li>
+        <li class="active"><a href="{% url 'faq' %}">Faq</a></li>
+    </ul>
+</nav>
+{% endblock %}
+
+{% block content_main %}
+<section class="content-main">
+    <h2 id="que-es">¿Qué es zoonas.com?</h2>
+    <p>Es un clon de reddit.com en castellano.</p>
+    <h2 id="zona">¿Qué es una zona?</h2>
+    <p>Una zona es un lugar donde la gente puede compartir contenido sobre un mismo tema. Por ejemplo tecnología, noticias, deportes, música, cocina…</p>
+</section>
+{% endblock %}

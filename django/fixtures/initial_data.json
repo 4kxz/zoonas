@@ -1,0 +1,46 @@
+[
+    {
+        "pk": 1,
+        "model": "users.user",
+        "fields": {
+            "username": "Anónimo",
+            "is_superuser": false
+        }
+    }
+,
+    {
+        "pk": 2,
+        "model": "users.user",
+        "fields": {
+            "username": "Admin",
+            "is_superuser": true
+        }
+    }
+,
+    {
+        "pk": 3,
+        "model": "users.user",
+        "fields": {
+            "username": "Carlos",
+            "is_superuser": true
+        }
+    }
+,
+    {
+        "pk": 4,
+        "model": "users.user",
+        "fields": {
+            "username": "Alex",
+            "is_superuser": true
+        }
+    }
+,
+    {
+        "pk": 1,
+        "model": "zones.zone",
+        "fields": {
+            "name": "General",
+            "slug": "general"
+        }
+    }
+]

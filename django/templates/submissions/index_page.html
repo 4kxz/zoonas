@@ -1,0 +1,26 @@
+{% extends 'base_template.html' %}
+
+{% block page_title %}Todas - {{ block.super }}{% endblock %}
+
+{% block content_header %}
+<header class="content-header">
+    <h1><a href="{% url 'submissions:global' %}">Todas</a></h1>
+</header>
+{% endblock %}
+
+{% block content_panel %}
+<aside class="content-panel">
+    <h1>Zonas más activas</h1>
+    <ol>
+        {% for zone in default_zone_list %}
+        <li><a href="{{ zone.get_absolute_url }}">{{ zone }}</a></li>
+        {% endfor %}
+    </ol>
+</aside>
+{% endblock %}
+
+{% block content_main %}
+<section class="content-main">
+    {% include 'submissions/article_list.html' %}
+</section>
+{% endblock %}

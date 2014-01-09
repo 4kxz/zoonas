@@ -1,0 +1,15 @@
+{% extends 'base_template.html' %}
+{% load crispy_forms_tags %}
+
+{% block content_header %}
+<header class="content-header">
+    <h1>Editar "<em>{{ submission.title }}</em>"</h1>
+</header>
+{% endblock %}
+
+{% block content_main %}
+<section class="content-main">
+    {% crispy form %}
+</section>
+{% endblock %}
+

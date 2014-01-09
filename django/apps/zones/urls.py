@@ -1,0 +1,75 @@
+from django.conf.urls import patterns, url
+
+from .views import (
+    AboutView,
+    IndexView,
+    MainView,
+    PermissionsView,
+    ProposalCreateView,
+    ProposalIndexView,
+    ProposalVoteView,
+    SettingsView,
+    SubmitView,
+    SubscriptionsView,
+    ZoneCreateView,
+    )
+
+
+urlpatterns = patterns(
+    '',
+    url(
+        r'^$',
+        IndexView.as_view(),
+        name='index',
+        ),
+    url(
+        r'^new/$',
+        ZoneCreateView.as_view(),
+        name='create',
+        ),
+    url(
+        r'^new/proposals/$',
+        ProposalIndexView.as_view(),
+        name='proposals_index',
+        ),
+    url(
+        r'^new/proposals/new/$',
+        ProposalCreateView.as_view(),
+        name='proposals_create',
+        ),
+    url(
+        r'^new/proposals/(?P<slug>[\w\d-]+)/vote/$',
+        ProposalVoteView.as_view(),
+        name='proposals_vote',
+        ),
+    url(
+        r'^(?P<slug>[\w\d-]+)/$',
+        MainView.as_view(),
+        name='main',
+        ),
+    url(
+        r'^(?P<slug>[\w\d-]+)/about/$',
+        AboutView.as_view(),
+        name='about',
+        ),
+    url(
+        r'^(?P<slug>[\w\d-]+)/submit/$',
+        SubmitView.as_view(),
+        name='submit',
+        ),
+    url(
+        r'^(?P<slug>[\w\d-]+)/subscriptions/$',
+        SubscriptionsView.as_view(),
+        name='subscriptions',
+        ),
+    url(
+        r'^(?P<slug>[\w\d-]+)/settings/$',
+        SettingsView.as_view(),
+        name='settings',
+        ),
+    url(
+        r'^(?P<slug>[\w\d-]+)/permissions/$',
+        PermissionsView.as_view(),
+        name='permissions',
+        ),
+    )

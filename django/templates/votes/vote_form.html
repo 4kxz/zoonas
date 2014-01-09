@@ -1,0 +1,12 @@
+<div class="item-vote {{ state }}">
+    <form action="{{ action }}" method="POST" class="vote-form up">
+        {% csrf_token %}
+        <input type="hidden" name="vote" value="up"/>
+        <input type="submit" value="✓" title="arrivotar"/>
+    </form>
+    <form action="{{ action }}" method="POST" class="vote-form down">
+        {% csrf_token %}
+        <input type="hidden" name="vote" value="down"/>
+        <input type="submit" value="✗" title="abajotar"/>
+    </form>
+</div>

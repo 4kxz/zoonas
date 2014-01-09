@@ -1,0 +1,16 @@
+{% load users_tags %}
+<table width="90%">
+    {% for action in list %}
+    <tr>
+        <td>
+            <span title="{{ action.created }}">
+                Hace {{ action.created|timesince }}
+            </span>
+        </td>
+        <td>{{ action }}</td>
+        {% if not current_profile %}
+        <td>{% username_link action.user %}</td>
+        {% endif %}
+    </tr>
+{% endfor %}
+</table>

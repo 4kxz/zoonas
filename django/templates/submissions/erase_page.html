@@ -1,0 +1,18 @@
+{% extends 'base_template.html' %}
+{% load crispy_forms_tags %}
+
+{% block content_header %}
+<header class="content-header">
+    <h1>Borrar "<em>{{ submission.title }}</em>"</h1>
+</header>
+{% endblock %}
+
+{% block content_main %}
+<section class="content-main">
+    <div class="warning">
+        <p>No se puede deshacer. Quedará como un envío sin título ni contenido, pero los votos y comentarios de otros usuarios no se borrarán. ¿Estás seguro?</p>
+    </div>
+    {% crispy form %}
+</section>
+{% endblock %}
+

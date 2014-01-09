@@ -1,0 +1,27 @@
+{% load users_tags %}
+<h1>User menu</h1>
+<ul>
+    {% if not user.is_authenticated %}
+    <li><a href="{% url 'account:login' %}">Entrar</a></li>
+    {% else %}
+    {% if not user.is_superuser %}
+    <li><a class="username" href="{% url 'account:password' %}">{{ user }}</a></li>
+    {% else %}
+    <li class="admin-menu">
+        <a class="username" href="{% url 'account:password' %}">{{ user }}</a>
+        <ul>
+            <li><a href="{% url 'reports:index' %}">Reportes</a></li>
+            <li><a href="{% url 'notes:index' %}">Mensajes</a></li>
+            <li><a href="{% url 'domains:index' %}">Dominios</a></li>
+            <li><a href="{% url 'profiles:index' %}">Usuarios</a></li>
+        </ul>
+    </li>
+    {% endif %}
+    <li>
+        <form action="{% url 'account:logout' %}" method="POST">
+            {% csrf_token %}
+            <input type="submit" value="Salir">
+        </form>
+    </li>
+    {% endif %}
+</ul>

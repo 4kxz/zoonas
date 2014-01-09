@@ -1,4 +1,15 @@
+scores.py
+htmlcov
+
+.*
+!.gitignore
+*~
+*.bak
 *.log
 *.pot
 *.pyc
-local_settings.py
+*.pyo
+*.rdb
+*.scssc
+*.sqlite
+*.swp

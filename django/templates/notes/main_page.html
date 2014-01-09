@@ -1,0 +1,26 @@
+{% extends 'base_template.html' %}
+{% load crispy_forms_tags %}
+{% load users_tags %}
+
+{% block content_header %}
+<header class="content-header">
+    <h1>Nota</h1>
+</header>
+{% endblock %}
+
+{% block content_main %}
+<section class="content-main">
+    <article class="note">
+        {% include 'notes/embed.html' %}
+    </article>
+    {% if user.is_authenticated %}
+    <menu class="content-menu">
+        <ul>
+            {% if note.is_editable and user == note.author %}
+            <li><a href="{{ note.get_edit_url }}">Editar</a></li>
+            {% endif %}
+        </ul>
+    </menu>
+    {% endif %}
+</section>
+{% endblock %}

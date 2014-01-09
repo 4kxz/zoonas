@@ -1,0 +1,105 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>
+            {% block page_title %}zoonas.com{% endblock %}
+        </title>
+        <meta charset="UTF-8">
+        <meta name="description" content="{% block description %}zoonas.com{% endblock %}">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="icon" type="image/x-icon" href="{% static 'favicon.ico' %}">
+        <link rel="stylesheet" media="screen" href="{% static 'style.css' %}">
+        {% if user.is_superuser %}
+            <link rel="stylesheet" media="screen" href="{% static 'admin.css' %}">
+        {% endif %}
+        <script src="http://code.jquery.com/jquery-2.0.3.min.js"></script>
+    </head>
+    <body>
+        <div id="header" class="{% if debug %} debug {% endif %}">
+            <div class="site-menu">
+                <header>
+                    <h1><a class="zoonas-logo" href="{% url 'frontpage' %}">zoonas.com</a></h1>
+                </header>
+                <nav>
+                    {% include 'zone_menu.html' %}
+                </nav>
+            </div>
+            <div class="user-menu">
+                <nav>
+                    {% include 'user_menu.html' %}
+                </nav>
+            </div>
+        </div>
+        <div id="middle">
+            {% include 'messages.html' %}
+            <section class="content">
+                {% block content_header %}{% endblock %}
+                {% block content_navigation %}
+                {% if navigation or action %}
+                <nav class="content-navigation">
+                    <h1>Navigation</h1>
+                    <ul>
+                        {% for li in navigation %}
+                        {% if li == section %}
+                        <li class="active"><a href="{{ li.url }}">{{ li.text }}</a></li>
+                        {% else %}
+                        <li><a href="{{ li.url }}">{{ li.text }}</a></li>
+                        {% endif %}
+                        {% endfor %}
+                        {% if action and action == section %}
+                        <li class="action active"><a href="{{ action.url }}">{{ action.text }}</a></li>
+                        {% elif action %}
+                        <li class="action"><a href="{{ action.url }}">{{ action.text }}</a></li>
+                        {% endif %}
+                    </ul>
+                </nav>
+                {% endif %}
+                {% endblock %}
+                {% block content_panel %}{% endblock %}
+                {% block content_main %}{% endblock %}
+            </section>
+        </div>
+        <div id="footer" >
+            <footer>
+                <nav>
+                    <h1>Ayuda</h1>
+                    <ul>
+                        <li><a href="{% url 'account:register' %}">Regístrate</a></li>
+                        <li><a href="{% url 'faq' %}">FAQ</a></li>
+                    </ul>
+                </nav>
+                <nav>
+                    <h1>zoonas.com</h1>
+                    <ul>
+                        <li><a href="mailto:info@zoonas.com" rel="nofollow">Contactar</a></li>
+                        <li><a href="https://encrypted.google.com/search?q=zoo+map&amp;tbm=isch" rel="nofollow">Mapa del sitio</a></li>
+                    </ul>
+                </nav>
+                <nav>
+                    <h1>Síguenos</h1>
+                    <ul>
+                        <li><a href="#" class="external" rel="nofollow">Facebook</a></li>
+                        <li><a href="#" class="external" rel="nofollow">Twitter</a></li>
+                    </ul>
+                </nav>
+            </footer>
+        </div>
+        {% if not debug and not user.is_superuser %}
+        <script type="text/javascript">
+            var _gaq = _gaq || [];
+            _gaq.push(['_setAccount', 'UA-2772820-7']);
+            _gaq.push(['_trackPageview']);
+            (function() {
+            var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+            ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+            var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+            })();
+        </script>
+        {% endif %}
+        <script src="{% static 'all.js' %}"></script>
+        {% if user.is_authenticated and not debug %}
+        <script src="{% static 'users.js' %}"></script>
+        {% endif %}
+    </body>
+</html>

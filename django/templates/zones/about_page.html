@@ -1,0 +1,61 @@
+{% extends 'zones/base_page.html' %}
+{% load users_tags %}
+
+{% block content_main %}
+<section class="content-main">
+    <p>Zona creada el {{ current_zone.created }}.</p>
+
+    <h1>Descripción</h1>
+    <p>{{ current_zone.description }}</p>
+
+    <h1>Moderadores</h1>
+    <ul>
+        {% for user in current_zone.moderators %}
+        <li>{% username_link user %}</li>
+        {% empty %}
+        <li>No hay moderadores</li>
+        {% endfor %}
+    </ul>
+</section>
+
+{% if user.is_superuser %}
+<section class="zone-stats debug">
+    <h1>Estadísticas</h1>
+    <table>
+        <tr>
+            <td>Name</td>
+            <td>{{ zone.name }}</td>
+        </tr>
+        <tr>
+            <td>Url</td>
+            <td>{{ zone.slug }}</td>
+        </tr>
+        <tr>
+            <td>Size</td>
+            <td>{{ zone.size }}</td>
+        </tr>
+        <tr>
+            <td>Vote deviation</td>
+            <td>{{ zone.vote_ewma|floatformat:3 }}</td>
+        </tr>
+        <tr>
+            <td>Average score</td>
+            <td>{{ zone.score_ewma|floatformat:3 }}</td>
+        </tr>
+        <tr>
+            <td>Value</td>
+            <td>{{ zone.value|floatformat:3 }}</td>
+        </tr>
+        <tr>
+            <td>Description</td>
+            <td>{{ zone.description }}</td>
+        </tr>
+        <tr>
+            <td>Information</td>
+            <td>{{ zone.information }}</td>
+        </tr>
+    </table>
+</section>
+{% endif %}
+
+{% endblock %}

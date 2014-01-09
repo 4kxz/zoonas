@@ -1,0 +1,41 @@
+{% extends 'base_template.html' %}
+{% load reports_tags %}
+{% load users_tags %}
+
+{% block content_header %}
+<header class="content-header">
+    <h1>Reportes pendientes ({{ unresolved_count }})</h1>
+</header>
+{% endblock %}
+
+{% block content_main %}
+<section class="content-main">
+    <div class="reports">
+        {% for report in report_list %}
+        <article class="report">
+            <header>
+                <h1><a href="{{ report.item.get_absolute_url }}">{{ report.item }}</a></h1>
+            </header>
+            {% include 'notes/embed.html' with note=report.note %}
+            {% if user.is_authenticated %}
+            {% if user.is_superuser %}
+            <div class="item-resolve">{% resolve_form report %}</div>
+            {% endif %}
+            <menu class="item-menu">
+                <ul>
+                    {% if user == report.note.author %}
+                    <li><a href="{{ report.note.get_edit_url }}">editar</a></li>
+                    {% endif %}
+                </ul>
+            </menu>
+            {% endif %}
+        </article>
+        {% empty %}
+        <div class="content-messages">
+            No hay ningún reporte.
+        </div>
+        {% endfor %}
+    </div>
+    {% include 'pagination/pagination.html' %}
+</section>
+{% endblock %}

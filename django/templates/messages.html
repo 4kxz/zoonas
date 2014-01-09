@@ -1,0 +1,12 @@
+{% if messages %}
+<section class="user-messages">
+    <h1>Notifications</h1>
+    <ul>
+        {% for message in messages %}
+        <li{% if message.tags %} class="message-{{ message.tags }}"{% endif %}>
+            <p class="wrapper">{{ message }}</p>
+        </li>
+        {% endfor %}
+    </ul>
+</section>
+{% endif %}

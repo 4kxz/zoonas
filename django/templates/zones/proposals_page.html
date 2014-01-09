@@ -1,0 +1,43 @@
+{% extends 'base_template.html' %}
+{% load misc_tags %}
+{% load users_tags %}
+{% load votes_tags %}
+
+{% block content_header %}
+<header class="content-header">
+    <h1>Zonas propuestas</h1>
+</header>
+{% endblock %}
+
+{% block content_navigation %}
+<nav class="content-navigation">
+    <ul>
+        <li class="action"><a href="{% url 'zones:proposals_create' %}">Crear</a></li>
+    </ul>
+</nav>
+{% endblock %}
+
+{% block content_main %}
+<section class="content-main">
+    <div class="proposals">
+        {% for proposal in proposal_list %}
+        <article class="proposal item">
+            <header>
+                <h1>{{ proposal }}</h1>
+                <span class="progress">{{ proposal.progress }}</span>
+            </header>
+            <div class="summary">{{ proposal.description }}</div>
+            <footer>
+                <span class="author">{% username_link proposal.author %}</span>
+                <span class="timestamp" title="{{ proposal.created }}">hace {{ proposal.created|timesince }}</span>
+            </footer>
+            {% show_vote_form proposal user %}
+        </article>
+        {% empty %}
+        <div class="content-messages">
+            <a href="{% url 'zones:proposals_create' %}">Por aquí si no necesitas carreteras</a>.
+        </div>
+        {% endfor %}
+    </ol>
+</section>
+{% endblock %}

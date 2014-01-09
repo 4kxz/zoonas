@@ -1,0 +1,6 @@
+{% load static %}
+<a class="thumbnail external" target="_blank" rel="nofollow" href="{{ link }}">
+    {% if thumbnail %}
+    <img src="{{ thumbnail }}" alt="{{ alt }}"/>
+    {% endif %}
+</a>

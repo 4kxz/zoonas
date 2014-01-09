@@ -1,0 +1,53 @@
+{% extends 'users/profiles/base_page.html' %}
+
+{% block content_main %}
+<section class="content-main">
+    {% if current_profile.is_erased %}
+    <div class="content-messages" class="message-error"><p>Usuario borrado.</p></div>
+    {% elif not current_profile.is_active %}
+    <div class="content-messages" class="message-warning"><p>Usuario baneado.</p></div>
+    {% endif %}
+    <p>Registrado <span title="{{ current_profile.join_date }}">hace {{ current_profile.join_date|timesince }}</span>.</p>
+    {% with moderated_zones=current_profile.get_moderated_zones %}
+    {% if moderated_zones %}
+    <h1>Zonas que moderada</h1>
+    <ul>
+        {% for zone in moderated_zones %}
+        <li><a href="{{ zone.get_absolute_url }}">{{ zone.name }}</a></li>
+        {% endfor %}
+    </ul>
+    {% endif %}
+    {% endwith %}
+    {% if user.is_superuser %}
+    <div class="debug">
+        <h1>Estadísticas</h1>
+        <table>
+            <tr>
+                <td>Superuser</td>
+                <td>{{ current_profile.is_superuser }}</td>
+            </tr>
+            <tr>
+                <td>Active</td>
+                <td>{{ current_profile.is_active }}</td>
+            </tr>
+            <tr>
+                <td>Rejected</td>
+                <td>{{ current_profile.is_rejected }}</td>
+            </tr>
+            <tr>
+                <td>Erased</td>
+                <td>{{ current_profile.is_erased }}</td>
+            </tr>
+            <tr>
+                <td>Beautiful content</td>
+                <td>{{ current_profile.is_perv }}</td>
+            </tr>
+            <tr>
+                <td>Vote deviation</td>
+                <td>{{ current_profile.vote_ewma|floatformat:4 }}</td>
+            </tr>
+        </table>
+    </div>
+    {% endif %}
+</section>
+{% endblock %}

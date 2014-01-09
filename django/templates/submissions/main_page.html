@@ -1,0 +1,97 @@
+{% extends 'zones/base_page.html' %}
+{% load crispy_forms_tags %}
+{% load misc_tags %}
+{% load submissions_tags %}
+{% load users_tags %}
+{% load votes_tags %}
+
+{% block page_title %}{{ submission.title }}{% endblock %}
+
+{% block content_panel %}{% endblock %}
+
+{% block content_main %}
+<section class="content-main">
+    {% if submission.is_erased %}
+    <div class="content-messages message-error">Envío eliminado.</div>
+    {% elif submission.is_rejected %}
+    <div class="content-messages message-warning">Envío rechazado.</div>
+    {% endif %}
+    {% include 'submissions/article.html' %}
+    {% if user.is_authenticated %}
+    <menu class="content-menu">
+        <ul>
+            {% if user == submission.author and not is_old or zone_moderator %}
+            <li><a href="{{ submission.get_update_url }}">Editar</a></li>
+            {% if user == submission.author or zone_admin %}
+            <li><a href="{{ submission.get_erase_url }}">Borrar</a></li>
+            {% endif %}
+            {% else %}
+            <li><a href="{{ submission.get_report_url }}">Reportar</a></li>
+            {% endif %}
+            {% if zone_moderator %}
+            {% if not submission.is_rejected %}
+            <li>{% evaluation_form submission 'reject' %}</li>
+            {% else %}
+            <li>{% evaluation_form submission 'allow' %}</li>
+            {% endif %}
+            {% endif %}
+        </ul>
+    </menu>
+    {% endif %}
+</section>
+<section class="content-comments" id="comments">
+    <h2>Comentarios</h2>
+    <div class="comments">
+        {% for comment in submission.get_comments %}
+        {% include 'comments/article.html' %}
+        {% empty %}
+        <div class="content-messages">
+            No hay comentarios.
+        </div>
+        {% endfor %}
+    </div>
+    {% if user.is_authenticated %}
+    <h2>Nuevo comentario</h2>
+    {% crispy comment_form %}
+    {% endif %}
+</section>
+{% if user.is_authenticated %}
+<section class="content-stats">
+    <h2 title="La lista no es completa. Solo se muestran unos cuantos votos escogidos al azar.">Votos*</h2>
+    <ul class="content-votes">
+        {% for vote in submission.get_votes %}
+        <li class="{{ vote.get_description }}">{{ vote.user.get_public_name }}</li>
+        {% empty %}
+        <li>No hay votos públicos.</li>
+        {% endfor %}
+    </ul>
+    {% if user.is_superuser %}
+    <div class="debug">
+        <h2>Estadísticas</h2>
+        <table>
+            <tr>
+                <td>Value</td>
+                <td>{{ submission.value|floatformat:3 }}</td>
+            </tr>
+            <tr>
+                <td>Base score</td>
+                <td><span title="base score">{{ submission.base_score|floatformat:3 }}</span></td>
+            </tr>
+            <tr>
+                <td>Zone score</td>
+                <td><span title="zone score">{{ submission.zone_score|floatformat:3 }}</span></td>
+            </tr>
+            <tr>
+                <td>Global score</td>
+                <td><span title="global score">{{ submission.global_score|floatformat:3 }}</span></td>
+            </tr>
+            <tr>
+                <td>Domain</td>
+                <td>{{ submission.domain }}</td>
+            </tr>
+        </table>
+    </div>
+    {% endif %}
+</section>
+{% endif %}
+{% endblock %}

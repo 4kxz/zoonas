@@ -1,0 +1,31 @@
+{% extends 'base_template.html' %}
+{% load users_tags %}
+{% load zones_tags %}
+
+{% block content_header %}
+<header class="content-header">
+    <h1><a href="{% url 'frontpage' %}">Suscripciones</a></h1>
+</header>
+{% endblock %}
+
+{% block content_panel %}
+<aside class="content-panel">
+    <h1>Editar suscripciones</h1>
+    {% if zone_list %}
+    <ul>
+        {% for zone in zone_list %}
+        <li class="action">
+            {% subscription_form zone %}
+        </li>
+        {% endfor %}
+    </ul>
+    {% endif %}
+    <p>En el <a href="{% url 'zones:index' %}">índice de zonas</a> puedes encontrar zonas a las que suscribirte.</p>
+</aside>
+{% endblock %}
+
+{% block content_main %}
+<section class="content-main">
+    {% include 'submissions/article_list.html' %}
+</section>
+{% endblock %}

@@ -1,0 +1,42 @@
+{% extends 'base_template.html' %}
+{% load zones_tags %}
+
+{% block content_header %}
+<header class="content-header">
+    <h1>Índice de zonas</h1>
+</header>
+{% endblock %}
+
+{% block content_navigation %}
+<nav class="content-navigation">
+    <ul>
+        <li><a href="{% url 'zones:proposals_index' %}">Propuestas</a></li>
+    </ul>
+</nav>
+{% endblock %}
+
+{% block content_main %}
+<section class="content-main">
+    <div class="zones">
+        {% for zone in zone_list %}
+        <article class="zone item" id="zone-{{ zone.slug }}">
+            <header>
+                <h1><a href="{{ zone.get_absolute_url }}">{{ zone.name }}</a></h1>
+            </header>
+            <div class="summary">
+                <p class="description text">{{ zone.description }}</p>
+            </div>
+            {% if user.is_authenticated %}
+            <menu>
+                {% subscription_form zone %}
+            </menu>
+            {% endif %}
+        </article>
+        {% empty %}
+        <div class="content-messages">
+            No hay ninguna zona.
+        </div>
+        {% endfor %}
+    </div>
+</section>
+{% endblock %}

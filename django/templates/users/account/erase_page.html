@@ -1,0 +1,15 @@
+{% extends 'users/account/password_page.html' %}
+{% load crispy_forms_tags %}
+
+{% block content_main %}
+<section class="content-main">
+    <p>Ten en cuenta que:</p>
+    <ul>
+        <li>No podrás volver a acceder a la cuenta.</li>
+        <li>Se borrará tu nombre de usuario y cualquiera podrá usarlo de nuevo para registrarse.</li>
+        <li>Si eres moderador de alguna zona dejarás de serlo.</li>
+    </ul>
+    <p>Introduce tus datos para borrar la cuenta.</p>
+    {% crispy form %}
+</section>
+{% endblock %}

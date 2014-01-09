@@ -1,0 +1,12 @@
+{% load crispy_forms_tags %}
+{% load users_tags %}
+
+<table class="revoke-permissions">
+    {% for item in revoke_permissions %}
+    <tr>
+        <td>{{ item.perm.created|date:"Y-m-d H:i" }}</td>
+        <td>{% username_link item.perm.user %}</td>
+        <td>{% crispy item.form %}</td>
+    </tr>
+    {% endfor %}
+</table>

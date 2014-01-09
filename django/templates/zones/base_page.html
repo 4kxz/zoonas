@@ -1,0 +1,30 @@
+{% extends 'base_template.html' %}
+{% load misc_tags %}
+{% load users_tags %}
+{% load zones_tags %}
+
+{% block page_title %}{{ current_zone.name }} - {{ block.super }}{% endblock %}
+
+{% block content_header %}
+<header class="content-header">
+    <h1><a href="{{ current_zone.get_absolute_url }}">{{ current_zone.name }}</a></h1>
+</header>
+{% endblock %}
+
+{% block content_panel %}
+<aside class="content-panel">
+    <h1>Zona</h1>
+    {% if user.is_authenticated %}
+    <ul>
+        <li class="action">{% subscription_form current_zone %}</li>
+    </ul>
+    {% endif %}
+    <div class="zone-information">{{ current_zone.information|format }}</div>
+</aside>
+{% endblock %}
+
+{% block content_main %}
+<section class="content-main">
+    {% include 'submissions/article_list.html' %}
+</section>
+{% endblock %}

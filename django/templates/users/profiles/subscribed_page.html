@@ -1,0 +1,16 @@
+{% extends 'users/profiles/submitted_page.html' %}
+{% load users_tags %}
+{% load zones_tags %}
+
+{% block content_panel_extra %}
+<h1>Suscripciones</h1>
+<ul>
+    {% for zone in zone_list %}
+    <li class="action">
+        {% subscription_form zone %}
+    </li>
+    {% empty %}
+    <li><p> Usuario sin suscripciones</p></li>
+    {% endfor %}
+</ul>
+{% endblock %}

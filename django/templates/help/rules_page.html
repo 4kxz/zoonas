@@ -1,0 +1,47 @@
+{% extends 'base_template.html' %}
+
+{% block content_header %}
+<header class="content-header">
+    <h1>Ayuda</h1>
+</header>
+{% endblock %}
+
+{% block content_navigation %}
+<nav class="content-navigation">
+    <ul>
+        <li class="active"><a href="{% url 'rules' %}">Normas</a></li>
+        <li><a href="{% url 'faq' %}">Faq</a></li>
+    </ul>
+</nav>
+{% endblock %}
+
+{% block content_main %}
+<section class="content-main">
+    <div class="content-messages" class="message-warning">Borrador.</div>
+    <h1>Normas generales</h1>
+    <ol start="0">
+        <li><span class="hidden">Regla no escrita.</span></li>
+        {% comment %}
+        <li>Un moderador no puede inclumpir las normas o, por inacción, permitir que las normas sean incuplidas.</li>
+        <li>Un usuario debe obeceder las órdenes dadas por un moderador, excepto si estas órdenes entrasen en conflicto con las normas generales.</li>
+        <li>Los moderadores deben procurar que haya un buen ambiente, en la medida que hacerlo no entre en conflicto con las normas generales.</li>
+        {% endcomment %}
+        <li>No se permite:</li>
+        <ul>
+            <li>Insultar, despreciar, hacer mofa o publicar datos privados de cualquier persona <a title="Personas fictícias, anónimas, personajes históricos y similares no incluidos.">concreta</a>.</li>
+            <li>Enlaces a <a title="Programas pirateados, manuales para fabricar bombas, pornografía infantil, etc.">contenido ilegal</a>.</li>
+            <li>Hacer <a title="Para determinar si un enlace es spam se usa un algoritmo estocástico basado en Sentido Común™.">spam</a> o interferir con el funcionamiento normal del sitio.</li>
+            <li>Explotar <a title="Que los hay, y no son pocos.">bugs o fallos de seguridad</a> sin avisar con antelación a un administrador.</li>
+        </ul>
+        <li>Si a alguien se le ocurren más maneras de <a title="Siempre hay gente innovando.">hacer el capullo</a> puede que cambien las normas.</li>
+    </ol>
+    <h1>Normas de zonas</h1>
+    <p><em>Lo que digan los moderadores</em>.</p>
+    <h1>Etiqueta</h1>
+    <ol>
+        <li>Envía contenido acorde con el tema y las condiciones de cada zona.</li>
+        <li>Vota arriba lo que te parezca mas interesante, abajo lo menos y entremedio si dudas.</li>
+        <li>Hakuna matata.</li>
+    </ol>
+</section>
+{% endblock %}

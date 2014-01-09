@@ -1,0 +1,19 @@
+{% load submissions_tags %}
+{% load users_tags %}
+{% load votes_tags %}
+<article {{ submission|article:'item' }} id="submission-{{ submission.slug }}">
+    <header>
+        <h1><a {{ submission|a:'external' }}>{{ submission.title }}</a></h1>
+    </header>
+    <div class="summary">
+        {% show_thumbnail submission %}
+        <a class="permalink" title="permalink" href="{{ submission.get_absolute_url }}"></a>
+        {% if not current_zone %}
+        <a class="zone" href="{{ submission.zone.get_absolute_url }}">{{ submission.zone.name }}</a>
+        {% endif %}
+        <span class="author">por {% username_link submission.author %}</span>
+        <span class="timestamp" title="{{ submission.created }}">hace {{ submission.created|timesince }}</span>
+        <a class="comments" href="{{ submission.get_comments_url }}">{{ submission.comment_count }} comentarios</a>
+    </div>
+    {% show_vote_form submission user %}
+</article>

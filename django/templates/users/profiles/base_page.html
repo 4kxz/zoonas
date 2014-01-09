@@ -1,0 +1,32 @@
+{% extends 'base_template.html' %}
+{% load misc_tags %}
+{% load users_tags %}
+
+{% block page_title %}{{ current_profile.get_username }} - {{ block.super }}{% endblock %}
+
+{% block content_header %}
+<header class="content-header">
+    <h1>{% username_link current_profile %}</h1>
+</header>
+{% endblock %}
+
+{% block content_panel %}
+<aside class="content-panel">
+    <h1>Usuario</h1>
+    <ul>
+        {% if user.is_superuser %}
+        <li class="action debug">
+        {% if not current_profile.is_rejected %}
+        {% evaluation_form current_profile 'reject' %}
+        {% else %}
+        {% evaluation_form current_profile 'allow' %}
+        {% evaluation_form current_profile 'ban' %}
+        {% endif %}
+        </li>
+        {% endif %}
+        <li><a href="{{ current_profile.get_report_url }}">Reportar a {{ current_profile.get_public_name }}</a></li>
+    </ul>
+    {% block content_panel_extra %}
+    {% endblock %}
+</aside>
+{% endblock %}

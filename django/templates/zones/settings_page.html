@@ -1,0 +1,18 @@
+{% extends 'zones/base_page.html' %}
+{% load crispy_forms_tags %}
+{% load users_tags %}
+{% load zones_tags %}
+
+{% block content_main %}
+<section class="content-main">
+    <h1>Opciones</h1>
+    {% crispy form %}
+
+    <h1>Moderadores</h1>
+    <p>Puedes borrar a cualquier moderador que lleve menos tiempo que tu y a ti mismo.</p>
+    {% revoke_permission_form current_zone %}
+
+    <h2>Añadir moderador</h2>
+    {% crispy add_form %}
+</section>
+{% endblock %}

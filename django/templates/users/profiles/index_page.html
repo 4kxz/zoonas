@@ -1,0 +1,22 @@
+{% extends 'base_template.html' %}
+{% load users_tags %}
+
+{% block content_header %}
+<header class="content-header">
+    <h1>Índice de usuarios</h1>
+</header>
+{% endblock %}
+
+{% block content_main %}
+<section class="content-main">
+    <ol class="listing users">
+        {% for user in user_list %}
+        <li>
+            <article class="user">{% username_link user %}</article>
+        </li>
+        {% empty %}
+        <li><article><p>Nada por aquí...</p></article></li>
+        {% endfor %}
+    </ol>
+</section>
+{% endblock %}

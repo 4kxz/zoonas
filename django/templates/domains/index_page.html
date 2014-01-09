@@ -1,0 +1,24 @@
+{% extends 'base_template.html' %}
+
+{% block content_header %}
+<header class="content-header">
+    <h1>Dominios</h1>
+</header>
+{% endblock %}
+
+{% block content_main %}
+<section class="content-main">
+    <table class="domains">
+        <tr>
+            <th>Nombre de dominio</th>
+            <th></th>
+        </tr>
+        {% for dn in domainname_list %}
+        <tr>
+            <td><a href="http://{{ dn }}">{{ dn }}</a></td>
+            <td>{{ dn.count }}</td>
+        </tr>
+        {% endfor %}
+    </table>
+</section>
+{% endblock %}

@@ -1,0 +1,119 @@
+@import 'common';
+
+$header-size: 2em;
+$separator-color: $fg-light-color - 20;
+
+#header {
+    height: $header-size;
+    &:before {
+        content: "";
+        position: absolute;
+        left: 0;
+        top: 0;
+        height: $header-size;
+        width: 100%;
+        z-index: -1;
+        background: $fg-light-color;
+        @media (min-width: 640px) {
+            box-shadow: $medium-shadow rgba(0, 0, 0, 0.1);
+        }
+    }
+}
+.user-menu {
+    float: right;
+    nav > h1 {
+        display: none;
+    }
+    li, form, a, input {
+        float: left;
+        display: block;
+        height: $header-size;
+        line-height: $header-size;
+    }
+    a, input {
+        box-shadow: none;
+        border: 0;
+        padding: 0 .5em;
+        background: transparent;
+        color: $common-color;
+        text-shadow: none;
+    }
+    .username {
+        color: $special-color;
+    }
+}
+.site-menu {
+    float: left;
+    position: relative;
+    &:hover {
+        header a {
+            @include block_highlight($dark-color, $light-color);
+        }
+        nav {
+            display: table;
+        }
+    }
+    header {
+        height: $header-size;
+        h1 {
+            font-size: 1em;
+            display: inline-block;
+            width: 10em;
+            font-size: $header-size * .9;
+            font-weight: normal;
+            &:after {
+                padding-left: .1em;
+                content: "≡";
+            }
+        }
+        a {
+            pointer-events: auto;
+            padding: 0 .2em;
+            line-height: 1.1em;
+            font-family: $logo-font;
+            color: $dark-color;
+        }
+    }
+    .subscribed-zones-menu {
+        border-right: 1px solid $separator-color;
+        h1 a {
+            color: $special-color;
+        }
+    }
+    nav {
+        z-index: 1;
+        display: none;
+        position: absolute;
+        box-shadow: $big-shadow rgba(0, 0, 0, 0.25);
+        border-top: .3em solid $dark-color;
+        background: $fg-light-color;
+        & > h1 {
+            display: none;
+        }
+        section {
+            display: table-cell;
+            vertical-align: top;
+        }
+        a {
+            display: block;
+            padding: .3em .5em;
+            min-width: 6em;
+            color: $dark-color;
+        }
+        h1 a {
+            border-bottom: 1px solid $separator-color;
+            padding: .2em .3em;
+            font-size: 1.2em;
+            font-variant: small-caps;
+            color: $common-color;
+        }
+        .last {
+            border-top: 1px solid $separator-color;
+        }
+    }
+}
+#header {
+    a:hover, input:hover {
+        @include block_highlight($dark-color, $light-color);
+    }
+}
