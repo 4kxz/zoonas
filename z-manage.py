@@ -8,17 +8,17 @@ import time
 
 
 SELF = sys.argv[0]
-BROWSER = os.getenv('ZOONAS_BROWSER', 'exo-open')
-TERMINAL = os.getenv('ZOONAS_TERM', 'xterm')
-VIRTUALENV = os.getenv('ZOONAS_VENV', './virtualenv')
+BROWSER = os.getenv('DJANGO_BROWSER', 'xdg-open')
+TERMINAL = os.getenv('DJANGO_TERMINAL', 'xterm')
+USER = os.getenv('ZOONAS_SERVER_USER', 'root')  # Safe default LOL.
+SERVER = os.getenv('ZOONAS_SERVER_IP', '0.0.0.0')  # Not even trying.
+SETTINGS = os.getenv('ZOONAS_SETTINGS_MODULE', 'settings.development')
+VIRTUALENV = os.getenv('ZOONAS_VIRTUALENV', './virtualenv')
 VENVPIP = VIRTUALENV + '/bin/pip'
 VENVPYTHON = VIRTUALENV + '/bin/python'
 VENVSPHINX = VIRTUALENV + '/bin/sphinx-build'
 VENVAPIDOC = VIRTUALENV + '/bin/sphinx-apidoc'
 VENVCOVERAGE = VIRTUALENV + '/bin/coverage'
-USER = os.getenv('ZOONAS_SERVER_USER', 'root')  # Safe default LOL.
-SERVER = os.getenv('ZOONAS_SERVER_IP', '0.0.0.0')  # Not even trying.
-SETTINGS = os.getenv('ZOONAS_SETTINGS_MODULE', 'settings.development')
 
 # Let's be honest, I don't know what I'm doing.
 os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'settings.development')
